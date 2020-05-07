@@ -131,7 +131,9 @@ module.exports = {
 		moment: 'moment'
 	},
 	optimization: {
-		minimizer: [new TerserPlugin()]
+		minimizer: [new TerserPlugin({
+			parallel: 1
+		})]
 	},
 	cache: {
 		type: 'filesystem',
