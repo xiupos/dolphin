@@ -1,16 +1,15 @@
 import * as S3 from 'aws-sdk/clients/s3';
 import config from '../../config';
-import * as httpsProxyAgent from 'https-proxy-agent';
-import * as agentkeepalive from 'agentkeepalive';
+import { Meta } from '../../models/entities/meta';
+import { getAgentByUrl } from '../../misc/fetch';
 
-const httpsAgent = config.proxy
-	? new httpsProxyAgent(config.proxy)
-	: new agentkeepalive.HttpsAgent({
-			freeSocketTimeout: 30 * 1000
-		});
+export function getS3(meta: Meta) {
+	const u = config.drive.endpoint != null
+		? `${config.drive.useSSL ? 'https://' : 'http://'}${config.drive.endpoint}`
+		: `${config.drive.useSSL ? 'https://' : 'http://'}example.net`;
 
-export function getS3() {
-	const conf = {
+	console.log(JSON.stringify(config.drive, null, 2));
+	return new S3({
 		endpoint: config.drive.endpoint,
 		accessKeyId: config.drive.accessKey,
 		secretAccessKey: config.drive.secretKey,
@@ -18,14 +17,7 @@ export function getS3() {
 		sslEnabled: config.drive.useSSL,
 		s3ForcePathStyle: true,
 		httpOptions: {
+			agent: getAgentByUrl(new URL(u))
 		}
-	} as S3.ClientConfiguration;
-
-	if (config.drive.useSSL) {
-		conf.httpOptions!.agent = httpsAgent;
-	}
-
-	const s3 = new S3(conf);
-
-	return s3;
+	});
 }
