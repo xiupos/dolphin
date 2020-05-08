@@ -19,7 +19,7 @@
 		"gulp": "gulp build",
 		"clean": "gulp clean",
 		"cleanall": "gulp cleanall",
-		"test": "gulp test"
+		"test": "TS_NODE_FILES=true TS_NODE_TRANSPILE_ONLY=true TS_NODE_COMPILER_OPTIONS=\"{\\\"target\\\":\\\"es2017\\\",\\\"module\\\":\\\"commonjs\\\",\\\"typeRoots\\\":[\\\"node_modules/@types\\\",\\\"src/@types\\\"]}\" mocha"
 	},
 	"resolutions": {
 		"lodash": "^4.17.13",
@@ -189,5 +189,9 @@
 		"websocket": "1.0.31",
 		"ws": "7.2.5",
 		"xev": "2.0.1"
+	},
+	"devDependencies": {
+		"@types/mocha": "7.0.2",
+		"mocha": "7.1.2"
 	}
 }
