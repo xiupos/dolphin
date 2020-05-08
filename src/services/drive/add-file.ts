@@ -300,7 +300,7 @@ export default async function(
 	file.comment = comment;
 	file.properties = properties;
 	file.isLink = isLink;
-	
+
 	if (user) {
 		file.userId = user.id;
 		file.userHost = user.host;
