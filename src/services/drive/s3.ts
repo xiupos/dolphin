@@ -8,7 +8,6 @@ export function getS3(meta: Meta) {
 		? `${config.drive.useSSL ? 'https://' : 'http://'}${config.drive.endpoint}`
 		: `${config.drive.useSSL ? 'https://' : 'http://'}example.net`;
 
-	console.log(JSON.stringify(config.drive, null, 2));
 	return new S3({
 		endpoint: config.drive.endpoint,
 		accessKeyId: config.drive.accessKey,
