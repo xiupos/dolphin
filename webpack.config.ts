@@ -113,7 +113,7 @@ module.exports = {
 	],
 	output: {
 		path: __dirname + '/built/client/assets',
-		filename: `[name].${meta.version}.js`,
+		filename: `[name].js`,
 		publicPath: `/assets/`
 	},
 	resolve: {
