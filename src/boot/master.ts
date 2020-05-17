@@ -155,15 +155,18 @@ async function init(): Promise<Config> {
 }
 
 async function spawnWorkers(limit: number = 1) {
-	const workers = Math.min(limit, os.cpus().length);
-	bootLogger.info(`Starting ${workers} worker${workers === 1 ? '' : 's'}...`);
-	await Promise.all([...Array(workers)].map(spawnWorker));
+	//const workers = Math.min(limit, os.cpus().length);
+	//bootLogger.info(`Starting ${workers} worker${workers === 1 ? '' : 's'}...`);
+	await Promise.all([
+		spawnWorker('main'),
+		spawnWorker('queue')
+	]);
 	bootLogger.succ('All workers started');
 }
 
-function spawnWorker(): Promise<void> {
+function spawnWorker(type: string): Promise<void> {
 	return new Promise(res => {
-		const worker = cluster.fork();
+		const worker = cluster.fork({ type });
 		worker.on('message', message => {
 			if (message !== 'ready') return;
 			res();
