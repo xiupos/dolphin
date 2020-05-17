@@ -9,7 +9,7 @@
 	"main": "./index.js",
 	"private": true,
 	"scripts": {
-		"start": "node ./index.js",
+		"start": "node --expose-gc ./index.js",
 		"init": "npm run migrate",
 		"migrate": "ts-node ./node_modules/typeorm/cli.js migration:run",
 		"migrateandstart": "npm run migrate && npm run start",
