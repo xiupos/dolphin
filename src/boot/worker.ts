@@ -5,17 +5,17 @@ import { initDb } from '../db/postgre';
  * Init worker process
  */
 export async function workerMain() {
-	const workerType = process.env.type;
+	const workerType = process.env.WORKER_TYPE;
+	console.log(workerType);
 
 	await initDb();
 
-	// start server
-	if (workerType === 'main') {
+	if (workerType === 'server') {
 		await require('../server').default();
-	}
-
-	// start job queue
-	if (workerType === 'queue') {
+	} else if (workerType === 'queue') {
+		require('../queue').default();
+	} else {
+		await require('../server').default();
 		require('../queue').default();
 	}
 

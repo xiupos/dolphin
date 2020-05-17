@@ -18,7 +18,7 @@ const ev = new Xev();
  * Init process
  */
 export default async function() {
-	process.title = `Dolphin (${cluster.isMaster ? 'master' : process.env.type || 'worker'})`;
+	process.title = `Dolphin (${cluster.isMaster ? 'master' : process.env.WORKER_TYPE || 'worker'})`;
 
 	if (cluster.isMaster || program.disableClustering) {
 		await masterMain();
