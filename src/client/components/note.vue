@@ -45,7 +45,7 @@
 						<x-media-list :media-list="appearNote.files"/>
 					</div>
 					<x-poll v-if="appearNote.poll" :note="appearNote" ref="pollViewer"/>
-					<x-url-preview v-for="url in urls" :url="url" :key="url" :compact="true" class="url-preview"/>
+					<x-url-preview v-for="url in urls" :url="url" :key="url" :compact="true" :detail="detail" class="url-preview"/>
 					<div class="renote" v-if="appearNote.renote"><x-note-preview :note="appearNote.renote"/></div>
 				</div>
 			</div>
