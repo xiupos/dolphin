@@ -19,4 +19,3 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - run: NODE_ENV=production yarn install
     - run: NODE_ENV=production yarn build
-    - run: yarn test
